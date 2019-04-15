@@ -1,6 +1,6 @@
 var navItems = [
   {"label": "About", "screen": "about", "icon": "info"},
-  {"label": "Schedule", "screen": "resources", "icon": "library_books"},
+  {"label": "Schedule", "screen": "schedule", "icon": "library_books"},
   "divider",
   {"label": "Data example", "screen": "data", "icon": "list"},
   {"label": "Sheet as API", "screen": "sheet-as-api", "icon": "list"}
