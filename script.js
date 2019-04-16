@@ -1,20 +1,9 @@
 var navItems = [
   {"label": "About", "screen": "about", "icon": "info"},
-  {"label": "Schedule", "screen": "schedule", "icon": "library_books"},
-  "divider",
-  {"label": "Data example", "screen": "data", "icon": "list"},
-  {"label": "Sheet as API", "screen": "sheet-as-api", "icon": "list"}
-  
-  // ,
-  // {"label": "Google Sign-in", "screen": "google-sign-in", "icon": "person"}
-  
-];
-
+  {"label": "Schedule", "screen": "schedule", "icon": "library_books"}];
 
 
 $(document).ready(function() {
-
-
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
 
@@ -34,7 +23,6 @@ $(document).ready(function() {
   $("body").on('click', "nav .mdc-list-item", function (event){
     drawer.open = false;
     loadScreen($(this).attr("data-screen"));
-
   });
 
 });
@@ -50,10 +38,6 @@ $(document).ready(function() {
  */
 function loadDrawerNavigationElements(navItems) {
   $.each(navItems, function(i,v) {
-    if (v == "divider") {
-        var divider = $("<hr>").addClass("mdc-list-divider");
-        $("nav.mdc-list").append(divider);
-    } else {    // create and append an anchor to the list
       var a = $("<a>").addClass("mdc-list-item");
       if (v.hasOwnProperty("icon")) {
         var icon = $("<i>").addClass("material-icons mdc-list-item__graphic");
@@ -63,12 +47,8 @@ function loadDrawerNavigationElements(navItems) {
       }
       a.append(v.label);
       $("nav.mdc-list").append(a);
-    }
-    
   });
-
   $("nav.mdc-list a:eq(0)").addClass("mdc-list-item--activated");
-
 }
 
 
