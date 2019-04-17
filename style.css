@@ -12,26 +12,6 @@ body {
     margin: 0;
 }
 
-#class-text-field {
-    display: inline;
-}
-
-#room-text-field {
-    display: inline;
-}
-
-#start-text-field {
-    display: inline;
-}
-
-#end-text-field {
-    display: inline;
-}
-
-#professor-text-field {
-    display: inline;
-}
-
 #add-button {
     padding: 18px 0px 38px 0px;
 }
