@@ -1,30 +1,21 @@
-//import Dexie from 'dexie.js';
-
 $(document).ready(function() {
     $('#add-button').on('click', function() {
-        var className = $('#Class').val();
-        var theRoom = $('#Room').val();
-        var theProfessor = $('#Professor').val();
-        var theStart = $('#Start').val();
-        var theEnd = $('#End').val();
-        console.log(className);
-        console.log(theRoom);
-        console.log(theProfessor);
-        console.log(theStart);
-        console.log(theEnd);
+        var theStatus = $('#StatusCode').val();
+        console.log(theStatus);
         
-          const db = new Dexie("friend_database");
-          db.version(1).stores({
-              friends: 'name,shoeSize,age'
-          });
+      var db = new Dexie("Status");
+      db.version(1).stores({
+          Codes: 'id'
+      });
 
-          //
-          // Put some data into it
-          //
-          db.friends.put({name: "Dave", shoeSize: 10, age: 58});
-          db.friends.put({name: "Nicolas", shoeSize: 8, age: 22});
+      //
+      // Put some data into it
+      //
+      db.Codes.put({id: theStatus});
         
+        db.Codes.each(function(code){
+        console.log(code.id);
+        document.getElementById("img").innerHTML += "<p>" + code.id + "</p>";
+      });
     });
 });
-
-//export default db;
