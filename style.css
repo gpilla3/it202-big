@@ -12,13 +12,6 @@ body {
     margin: 0;
 }
 
-#val-label {
-    font-size: 48px;
-    display: inline;
-    vertical-align: middle;
-    color: black;
-}
-
 #class-text-field {
     display: inline;
 }

@@ -1,27 +1,63 @@
 <div id="screenContent">
 <h3 class="mdc-typography--headline3">Schedule</h3>
 <ul class="mdc-list demo-list mdc-list--two-line">
-  <li class="template mdc-list-item mdc-ripple-upgraded" tabindex="-1"><span class="mdc-list-item__text"><span class="mdc-list-item__primary-text">Line item</span><span class="mdc-list-item__secondary-text">Secondary text</span></span></li>
+  <li class="template mdc-list-item mdc-ripple-upgraded" tabindex="-1"><span class="mdc-list-item__text"><span class="mdc-list-item__primary-text"></span><span class="mdc-list-item__secondary-text"></span></span></li>
 </ul>
 </div>
 
 
-
-
 <script>
-var resources = [
-  {name:"jQuery",url: "http://jquery.com/", desc: "JS Library that makes our coding lives easier", tags:"script"},
- {name:"Material Components for the Web",url: "https://material.io/develop/web/", desc: "HTML/CSS/JS implementation of Google's Material Design", tags:"UI"}
-  ];
+    
+$(document).ready(function() {
+        var className = $('#Class').val();
+        var theRoom = $('#Room').val();
+        var theProfessor = $('#Professor').val();
+        var theStart = $('#Start').val();
+        var theEnd = $('#End').val();
+        console.log(className);
+        console.log(theRoom);
+        console.log(theProfessor);
+        console.log(theStart);
+        console.log(theEnd);
+    
+          const db = new Dexie("friend_database");
+          db.version(1).stores({
+              friends: 'name,shoeSize,age'
+          });
 
-
-$.each(resources, function(i,v){
-  var clone = $("#screenContent li.template").clone();
-  clone.find(".mdc-list-item__primary-text").text(v.name);
-  clone.find(".mdc-list-item__secondary-text").text(v.desc);
-  clone.removeClass("template");
-  clone.attr("id", v.name);
-  $("#screenContent ul").append(clone);  
+          //
+          // Put some data into it
+          //
+          db.friends.put({name: "Dave", shoeSize: 10, age: 58});
+          db.friends.put({name: "Nicolas", shoeSize: 8, age: 22});
 });
 
-  </script>
+    
+    
+//     import info from './script.js';
+//     Console.log(info.class);
+    
+//   $.each(info, function(i,v){
+//   var clone = $("#screenContent li.template").clone();
+//   clone.find(".mdc-list-item__primary-text").text(v.class);
+//   clone.find(".mdc-list-item__secondary-text").text(v.room);
+//   clone.removeClass("template");
+//   clone.attr("id", v.professor);
+//   $("#screenContent ul").append(clone);
+// });
+    
+
+// var resources = [
+//   {name:"jQuery",url: "http://jquery.com/", desc: "JS Library that makes our coding lives easier", tags:"script"},
+//  {name:"Material Components for the Web",url: "https://material.io/develop/web/", desc: "HTML/CSS/JS implementation of Google's Material Design", tags:"UI"}
+//   ];
+
+// $.each(resources, function(i,v){
+//   var clone = $("#screenContent li.template").clone();
+//   clone.find(".mdc-list-item__primary-text").text(v.name);
+//   clone.find(".mdc-list-item__secondary-text").text(v.desc);
+//   clone.removeClass("template");
+//   clone.attr("id", v.name);
+//   $("#screenContent ul").append(clone);
+// });
+</script>

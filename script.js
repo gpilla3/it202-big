@@ -6,9 +6,7 @@ var navItems = [
 $(document).ready(function() {
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
-
   loadDrawerNavigationElements(navItems);
-
   loadScreen("home");
 
   // a constant that references MDCDrawer object
@@ -24,12 +22,7 @@ $(document).ready(function() {
     drawer.open = false;
     loadScreen($(this).attr("data-screen"));
   });
-
 });
-
-
-
-
 
 /**
  * load nav
@@ -46,7 +39,7 @@ function loadDrawerNavigationElements(navItems) {
         a.attr("data-screen", v.screen);
       }
       a.append(v.label);
-      $("nav.mdc-list").append(a);
+      $("nav.mdc-list").append(a);  
   });
   $("nav.mdc-list a:eq(0)").addClass("mdc-list-item--activated");
 }

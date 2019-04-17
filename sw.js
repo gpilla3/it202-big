@@ -1,11 +1,13 @@
 var cacheName = 'mca-v1';
 var appShellFiles = [
  "./index.html",
+ "./screen-content/home.html",
+ "./screen-content/about.html",
+ "./screen-content/schedule.html",
  "./script.js",
  "./style.css",
  "./warning.png"
 ];
-
 
 self.addEventListener('install', function(e) {
   console.log('[Service Worker] Install');
