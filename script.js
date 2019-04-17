@@ -1,5 +1,5 @@
 var navItems = [
-  {"label": "About", "screen": "about", "icon": "info"},
+  {"label": "Map", "screen": "Map", "icon": "info"},
   {"label": "Schedule", "screen": "schedule", "icon": "library_books"}];
 
 

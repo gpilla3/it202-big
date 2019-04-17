@@ -2,7 +2,7 @@ var cacheName = 'mca-v1';
 var appShellFiles = [
  "./index.html",
  "./screen-content/home.html",
- "./screen-content/about.html",
+ "./screen-content/randomLoc.html",
  "./screen-content/schedule.html",
  "./script.js",
  "./style.css",

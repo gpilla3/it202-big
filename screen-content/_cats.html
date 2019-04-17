@@ -1,9 +1,19 @@
 <h3 class="mdc-typography--headline3">HTTP CATS</h3>
-<p>Welcome! Please enter the status Code and see something CUTE!</p>
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+select {
+   font-size:25px;
+}
+</style>
+
+<p>Welcome! Please select the status Code and press GO to see something CUTE!</p>
     <div class="bottom-block-wrapper h-centered">
         <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-              <select id="status">
-              <option></option>
+              <select id="status" style="max-width:90%;">
               <option value="100">100</option>
               <option value="101">101</option>
               <option value="200">200</option>
@@ -61,40 +71,27 @@
               <option value="599">599</option>
               </select>
             <button id="add-button" class="mdc-button mdc-theme">GO!</button>
-
             <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
         </div>
      </div>
 
-    <div class="bottom-block-wrapper h-centered">
-        <div class="align-with-label">
-        </div>
-    </div>
-
-<div id = "image">
-    
-</div>
+<img id ="image" src="https://http.cat/100" style="width:100%; height:100%;">
 
 <script>
     //API Used: https://http.cat/
     $('#add-button').on('click', function() {
         var theStatus = document.getElementById("status").value;
-        console.log(theStatus);
+        var theSRC = "https://http.cat/" + theStatus;
+        document.getElementById("image").src = theSRC;
         
-        document.getElementById("image").innerHTML += "<img " + "src=" + "https://http.cat/" + theStatus + ">";
-        
-//       var db = new Dexie("Status");
-//       db.version(1).stores({
-//           Codes: 'id'
-//       });
+        var db = new Dexie("Status");
+        db.version(1).stores({
+          Codes: 'src'
+        });
 
-//       //
-//       // Put some data into it
-//       //
-//       db.Codes.put({id: theStatus});
-//         db.Codes.each(function(code){
-//         console.log(code.id);
-//         document.getElementById("image").innerHTML += "<img " + "src=" + "https://http.cat/" + code.id + ">";
-//       });
+        db.Codes.put({src: theStatus});
+        db.Codes.each(function(code){
+            //document.getElementById("image").innerHTML += "<img " + "src=" + "https://http.cat/" + code.id + ">";
+        });
     });
 </script>
