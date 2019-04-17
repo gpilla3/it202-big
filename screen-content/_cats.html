@@ -70,28 +70,37 @@ select {
               <option value="511">511</option>
               <option value="599">599</option>
               </select>
-            <button id="add-button" class="mdc-button mdc-theme">GO!</button>
+            <button id="Cat" class="mdc-button mdc-theme">Get me a Cat!</button>
             <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
         </div>
      </div>
+
+    <div class="bottom-block-wrapper h-centered">
+        <button id="Dog" class="mdc-button mdc-theme">I Like Dogs More!</button>
+    </div>
+
 
 <img id ="image" src="https://http.cat/100" style="width:100%; height:100%;">
 
 <script>
     //API Used: https://http.cat/
-    $('#add-button').on('click', function() {
+    $('#Cat').on('click', function() {
         var theStatus = document.getElementById("status").value;
         var theSRC = "https://http.cat/" + theStatus;
         document.getElementById("image").src = theSRC;
         
-        var db = new Dexie("Status");
-        db.version(1).stores({
-          Codes: 'src'
-        });
+//         var db = new Dexie("Status");
+//         db.version(1).stores({
+//           Codes: 'src'
+//         });
 
-        db.Codes.put({src: theStatus});
-        db.Codes.each(function(code){
-            //document.getElementById("image").innerHTML += "<img " + "src=" + "https://http.cat/" + code.id + ">";
-        });
+//         db.Codes.put({src: theStatus});
+//         db.Codes.each(function(code){
+//             //document.getElementById("image").innerHTML += "<img " + "src=" + "https://http.cat/" + code.id + ">";
+//         });
     });
+    
+//     $('#Dog').on('click', function() {
+//         document.getElementById("image").src = "random.dog/woof?";
+//     });
 </script>
