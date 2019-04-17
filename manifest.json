@@ -1,6 +1,6 @@
 {
-  "name": "CourseInfo",
-  "short_name": "CourseInfo",
+  "name": "RandomNess",
+  "short_name": "RandomNess",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "navy",
