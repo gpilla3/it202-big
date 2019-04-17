@@ -7,7 +7,7 @@ $(document).ready(function() {
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
   loadDrawerNavigationElements(navItems);
-  loadScreen("cats");
+  loadScreen("Map");
 
   // a constant that references MDCDrawer object
   const drawer = $("aside")[0].MDCDrawer;
