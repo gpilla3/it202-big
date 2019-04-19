@@ -3,7 +3,7 @@ var appShellFiles = [
  "./index.html",
  "./_cats.html",
  "./_Map.html",
- "./_schedule.html",
+ "./_Info.html",
  "./script.js",
  "./style.css",
  "./warning.png"

@@ -1,0 +1,42 @@
+<div class="h-centered">
+    <h3 class="mdc-typography--headline3">Movie/TV Info</h3>
+    <p>Enter the movie title or TV series title and get when it was released and it's rating</p>
+    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+            <input type="text" id="movie" class="mdc-text-field__input" placeholder="Movie Title">
+            <label class="mdc-floating-label mdc-theme--primary" for="search"></label>
+            <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
+    </div>
+    <button id="search" class="button">Search</button>
+    <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
+</div>
+
+<div class="card left">
+  <img src="https://bit.ly/2mx1zI0" height="300" width="200">
+  <div class="container">
+    <h4><b></b></h4> 
+    <p id="Year"></p>
+    <p id="Rating"></p>  
+  </div>
+</div>
+
+<script>
+//http://www.omdbapi.com/?i=tt3896198&apikey=8d9fa46f
+    function findMovie(){
+        var movieName = $('#movie').val();
+        $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
+            var poster = response.Poster;
+            console.log(response);
+            $('h4').html(response.Title);
+            document.getElementById("Year").innerHTML = "Released: " + response.Released;
+            document.getElementById("Rating").innerHTML = "IMDB Rating: " + response.imdbRating;
+            
+            if(poster !== "N/A"){
+                $('img').attr('src',poster);
+            }
+        })
+    }
+
+    $('#search').on('click', function() {
+        findMovie();
+    });
+</script>

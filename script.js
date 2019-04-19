@@ -1,13 +1,13 @@
 var navItems = [
   {"label": "Map", "screen": "Map", "icon": "info"},
-  {"label": "Schedule", "screen": "schedule", "icon": "library_books"}];
+  {"label": "Info", "screen": "Info", "icon": "library_books"}];
 
 
 $(document).ready(function() {
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
   loadDrawerNavigationElements(navItems);
-  loadScreen("cats");
+  loadScreen("Info");
 
   // a constant that references MDCDrawer object
   const drawer = $("aside")[0].MDCDrawer;
