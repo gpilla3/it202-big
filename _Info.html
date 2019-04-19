@@ -10,7 +10,20 @@
     <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
 </div>
 
-<div class="card left">
+<hr>
+
+<div id="searched" class="card left" style="display:none ">
+  <img src="https://bit.ly/2mx1zI0" height="300" width="200">
+  <div class="container">
+    <h4><b></b></h4> 
+    <p id="Year"></p>
+    <p id="Rating"></p>  
+  </div>
+</div>
+
+<hr>
+
+<div id="Save" class="card left" style="display:none ">
   <img src="https://bit.ly/2mx1zI0" height="300" width="200">
   <div class="container">
     <h4><b></b></h4> 
@@ -21,7 +34,22 @@
 
 <script>
 //http://www.omdbapi.com/?i=tt3896198&apikey=8d9fa46f
+    var db = new Dexie("Movie_Database");
+    db.version(1).stores({
+      Movies: 'title,year,rating,image'
+    });
+    //document.getElementById("list").innerHTML += "<p>" + movie.name + "<br>" + movie.shoeSize + "</p>";
+    db.Movies.each(function(movie){
+        console.log(movie.title)
+        var clone = $("#Save").clone();
+        clone.find('img').attr('src', movie.image);
+        //clone.find(".mdc-list-item__secondary-text").text(v.desc);
+        clone.attr("id", movie.title);
+        $("#Save").append(clone);
+    });
+    
     function findMovie(){
+        
         var movieName = $('#movie').val();
         $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
             var poster = response.Poster;
@@ -29,14 +57,18 @@
             $('h4').html(response.Title);
             document.getElementById("Year").innerHTML = "Released: " + response.Released;
             document.getElementById("Rating").innerHTML = "IMDB Rating: " + response.imdbRating;
-            
             if(poster !== "N/A"){
                 $('img').attr('src',poster);
             }
+            //db.Movies.put({title: response.Title, year: response.Released, rating: response.imdbRating, image: poster});
         })
     }
 
     $('#search').on('click', function() {
+          var x = document.getElementById("searched");
+          if (x.style.display === "none") {
+            x.style.display = "block";
+          }
         findMovie();
     });
 </script>

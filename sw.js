@@ -6,6 +6,7 @@ var appShellFiles = [
  "./_Info.html",
  "./script.js",
  "./style.css",
+ "./icon.ico",
  "./warning.png"
 ];
 
