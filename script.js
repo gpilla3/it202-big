@@ -1,7 +1,7 @@
 var navItems = [
   {"label": "Map", "screen": "Map", "icon": "info"},
-  {"label": "Info", "screen": "Info", "icon": "library_books"}];
-
+  {"label": "Info", "screen": "Info", "icon": "library_books"},
+  {"label": "Cam", "screen": "Cam", "icon": "library_books"}];
 
 $(document).ready(function() {
   // initialize all components with auto-init attributes
