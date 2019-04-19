@@ -7,7 +7,7 @@ $(document).ready(function() {
   // initialize all components with auto-init attributes
   window.mdc.autoInit();
   loadDrawerNavigationElements(navItems);
-  loadScreen("Map");
+  loadScreen("cats");
 
   // a constant that references MDCDrawer object
   const drawer = $("aside")[0].MDCDrawer;
@@ -51,7 +51,7 @@ function loadDrawerNavigationElements(navItems) {
  * @param {string} screenName - name to load, without _
  */
 function loadScreen(screenName) {
-  $("#content").load("_" + screenName + ".html", function () {
+  $("#content").load(screenName + ".html", function () {
     console.log("------ Screen load: " + screenName);
 });
 

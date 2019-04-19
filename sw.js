@@ -1,9 +1,9 @@
 var cacheName = 'mca-v1';
 var appShellFiles = [
  "index.html",
- "_cats.html",
- "_Map.html",
- "_Info.html",
+ "cats.html",
+ "Map.html",
+ "Info.html",
  "script.js",
  "style.css",
  "icon.ico",
