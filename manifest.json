@@ -1,7 +1,8 @@
 {
   "name": "RandomNess",
-  "short_name": "RandomNess",
+  "short_name": "RandNess",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "navy",
   "description": "A sample PWA",
@@ -9,6 +10,11 @@
     "src": "./warning.png",
     "sizes": "256x256",
     "type": "image/png"
+  },
+  {
+    "src": "./icon.ico",
+    "sizes": "256x256",
+    "type": "image/ico"
   }],
   "related_applications": []
 }
