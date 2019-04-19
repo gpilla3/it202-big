@@ -2,7 +2,6 @@
 <p>Click the button to get a random Location to go to, blue spots may appear</p>
 <div>
     <button id="location" class="button">Find me a spot!</button>
-    <button id="save" class="button">Save the Spot!</button>
 </div>
 
 <div id="googleMap" style="width:100%;height:400px;"></div>
@@ -17,18 +16,15 @@ $('#location').on('click', function() {
     initMap();
 });
     
+    
 function initMap() {
     var lat = (Math.random()*(85*2)-85);
     var lng = (Math.random()*(180*2)-180);
+    db.Markers.put({lt:lat, lg:lng});
     var rand = new google.maps.LatLng(lat,lng);
     var mapProp= {center: rand, zoom:2,};
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     var marker = new google.maps.Marker({position: rand, map: map});
-    
-    $('#save').on('click', function() {
-         db.Markers.put({lt:lat, lg:lng});
-    });
-    
     db.Markers.each(function(marker){
         var rand = new google.maps.LatLng(marker.lt,marker.lg);
         var marker = new google.maps.Marker({position: rand, map: map});
