@@ -1,8 +1,4 @@
 <style>
-    img{
-        float: left;
-    }
-    
     .image-option {
         border: solid 5px silver;
         width: 100px;
@@ -13,18 +9,21 @@
     }
 </style>
 
-<video id="player" width="320" height="240" controls autoplay></video>
-<button id="capture">Capture</button>
-<canvas id="canvas" width="320" height="240"></canvas>
-<div id="imageOptions">
+<div class="bottom-block-wrapper h-centered">
+    <video id="player" width="320" height="240" controls autoplay></video>
+    <button id="capture" class="button">Capture</button>
+    <canvas id="canvas" width="320" height="240"></canvas>
+</div>
+
+<div id="imageOptions" class="bottom-block-wrapper h-centered">
   <h2>Click an image below to make it the active image</h2>
 </div>
 
 <script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
-
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous">
+</script>
 
 <script>
   const images = [
@@ -45,15 +44,12 @@ crossorigin="anonymous"></script>
   ];
 
   var activeImage = images[0];
-
   var activeImageObject = new Image();
   activeImageObject.src = activeImage["filename"];
-
 
   // const funnyNoseAndGlasses = new Image();
   // funnyNoseAndGlasses.src = "nose-clip-art-51.png";
   // originally from http://clipart-library.com/new_gallery/nose-clip-art-51.png 
-
 
   // variables
   const supported = 'mediaDevices' in navigator;
@@ -69,7 +65,6 @@ crossorigin="anonymous"></script>
   const constraints = {
     video: true,
   };
-
 
   // Attach the video stream to the video element and autoplay.
   navigator.mediaDevices.getUserMedia(constraints)
@@ -136,7 +131,6 @@ function getImageData(type) {
           nose and glasses lens centers are about 300px apart,
           so we'll have to scale to paste on face.
       */
-
       var left_eye = response.responses[0].faceAnnotations[0].landmarks.filter(function(el) {return el.type == "LEFT_EYE_PUPIL"})[0];
       var right_eye = response.responses[0].faceAnnotations[0].landmarks.filter(function(el) {return el.type == "RIGHT_EYE_PUPIL"})[0];
 
@@ -181,6 +175,5 @@ function getImageData(type) {
       );
 
     });
-
 }
 </script>
