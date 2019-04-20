@@ -1,12 +1,18 @@
 <h3 class="mdc-typography--headline3">Random Location</h3>
 <p>Click the button to get a random Location to go to, blue spots may appear</p>
+<p>Click Save to store the marker of the location shown, if you are interested in going for a visit</p>
 <div>
     <button id="location" class="button">Find me a spot!</button>
+    <button id="Save" class="button">Save it!</button>
 </div>
 
+<div id="pano"></div>
 <div id="googleMap" style="width:100%;height:400px;"></div>
 
 <script>
+var lat;
+var lng;
+    
 var db = new Dexie("Marker_Database");
     db.version(2).stores({
         Markers: 'lt, lg'
@@ -16,13 +22,17 @@ $('#location').on('click', function() {
     initMap();
 });
     
+
+$('#Save').on('click', function() {
+    db.Markers.put({lt:lat, lg:lng});
+});
+    
     
 function initMap() {
-    var lat = (Math.random()*(85*2)-85);
-    var lng = (Math.random()*(180*2)-180);
-    db.Markers.put({lt:lat, lg:lng});
+    lat = (Math.random()*(85*2)-85);
+    lng = (Math.random()*(180*2)-180);
     var rand = new google.maps.LatLng(lat,lng);
-    var mapProp= {center: rand, zoom:2,};
+    var mapProp= {center: rand, zoom:8,};
     var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
     var marker = new google.maps.Marker({position: rand, map: map});
     db.Markers.each(function(marker){
@@ -33,4 +43,4 @@ function initMap() {
     
 </script>
 
-<script id="setMap" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa4dMSOASs_iLQnhrPoQ8EZgj2Im_pZ7o&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAElEFJTm3cFJLZeTD7iGqPkGtLXBmPjsM&callback=initMap"></script>
