@@ -1,17 +1,20 @@
 <h3 class="mdc-typography--headline3">Random Location</h3>
-<p>Click the button to get a random Location to go to, blue spots may appear</p>
-<p>Click Save to store the marker of the location shown, if you are interested in going for a visit</p>
+<p>Click the Find button to get a random Location to go to!</p>
+<p>Click Save to store the marker of the location shown, if you are interested in going for a visit!</p>
 <div>
     <button id="location" class="button">Find me a spot!</button>
     <button id="Save" class="button">Save it!</button>
 </div>
 
-<div id="pano"></div>
-<div id="googleMap" style="width:100%;height:400px;"></div>
+<div id="map" style="width:100%;height:400px;"></div>
+<div id="pano" style="width:100%;height:400px;"></div>
 
 <script>
-var lat;
-var lng;
+var latN;
+var lngN;
+var panorama;
+var map;
+var locN;
     
 var db = new Dexie("Marker_Database");
     db.version(2).stores({
@@ -24,23 +27,47 @@ $('#location').on('click', function() {
     
 
 $('#Save').on('click', function() {
-    db.Markers.put({lt:lat, lg:lng});
+//     console.log("Lat: " + latN);
+//     console.log("Log: " + lngN);
+    db.Markers.put({lt:latN, lg:lngN});
 });
     
     
 function initMap() {
-    lat = (Math.random()*(85*2)-85);
-    lng = (Math.random()*(180*2)-180);
-    var rand = new google.maps.LatLng(lat,lng);
-    var mapProp= {center: rand, zoom:8,};
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    var marker = new google.maps.Marker({position: rand, map: map});
-    db.Markers.each(function(marker){
-        var rand = new google.maps.LatLng(marker.lt,marker.lg);
-        var marker = new google.maps.Marker({position: rand, map: map});
-    });
+    var sv = new google.maps.StreetViewService;
+    
+    latN = Math.floor((Math.random()*(85*2)-85));
+    lngN = Math.floor((Math.random()*(180*2)-180));
+    locN = {lat: latN, lng: lngN};
+
+    sv.getPanorama({location: locN, radius: 10000000}, processSVData);
 }
     
-</script>
+function processSVData(data, status){
+    if (status === 'OK'){
+        locN = data.location.latLng;
+        latN = Number(locN.lat());
+        lngN = Number(locN.lng());
+//         console.log("Lat: " + latN);
+//         console.log("Log: " + lngN);
+        var mapProp= {center: locN, zoom:16};
+        map = new google.maps.Map(document.getElementById('map'),mapProp);
+        var marker = new google.maps.Marker({position: locN, map: map});
+        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), {motionTrackingControlOptions: {
+        position: google.maps.ControlPosition.LEFT_BOTTOM}});
+        panorama.setPano(data.location.pano);
+        panorama.setPov({ heading: 34, pitch: 10});
+        panorama.setVisible(true);
+        
+        db.Markers.each(function(marker){
+            var loc = new google.maps.LatLng(marker.lt,marker.lg);
+            var marker = new google.maps.Marker({position: loc, map: map});
+        });
+    } else{
+        initMap();
+    }
+}
+    
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAElEFJTm3cFJLZeTD7iGqPkGtLXBmPjsM&callback=initMap"></script>
+    
+</script>
