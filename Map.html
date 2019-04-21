@@ -4,6 +4,7 @@
 <div>
     <button id="location" class="button">Find me a spot!</button>
     <button id="Save" class="button">Save it!</button>
+    <button id="Show" class="button">Show Saved!</button>
 </div>
 
 <div id="map" style="width:100%;height:400px;"></div>
@@ -17,14 +18,17 @@ var map;
 var locN;
     
 var db = new Dexie("Marker_Database");
-    db.version(2).stores({
+    db.version(1).stores({
         Markers: 'lt, lg'
     });
     
 $('#location').on('click', function() {
     initMap();
 });
-    
+
+$('#Show').on('click', function() {
+     map.setZoom(2);
+});
 
 $('#Save').on('click', function() {
 //     console.log("Lat: " + latN);
@@ -48,26 +52,35 @@ function processSVData(data, status){
         locN = data.location.latLng;
         latN = Number(locN.lat());
         lngN = Number(locN.lng());
-//         console.log("Lat: " + latN);
-//         console.log("Log: " + lngN);
-        var mapProp= {center: locN, zoom:16};
+        var mapProp= {center: locN, zoom:18};
         map = new google.maps.Map(document.getElementById('map'),mapProp);
         var marker = new google.maps.Marker({position: locN, map: map});
-        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), {motionTrackingControlOptions: {
-        position: google.maps.ControlPosition.LEFT_BOTTOM}});
+        
+        marker.addListener('click', function(e) {
+            map.setZoom(18);
+            map.setCenter(marker.getPosition());
+        });
+        
+        panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), {
+            motionTrackingControlOptions: {position: google.maps.ControlPosition.LEFT_BOTTOM}
+        });
+        
         panorama.setPano(data.location.pano);
         panorama.setPov({ heading: 34, pitch: 10});
         panorama.setVisible(true);
         
         db.Markers.each(function(marker){
             var loc = new google.maps.LatLng(marker.lt,marker.lg);
-            var marker = new google.maps.Marker({position: loc, map: map});
+            var mark = new google.maps.Marker({position: loc, map: map});
+            mark.addListener('click', function(e) {
+                map.setZoom(18);
+                map.setCenter(mark.getPosition());
+                var sv = new google.maps.StreetViewService;
+                sv.getPanorama({location: {lat: marker.lt, lng: marker.lg}, radius: 2}, processSVData);
+            });
         });
     } else{
         initMap();
     }
 }
-    
-
-    
 </script>
