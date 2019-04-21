@@ -1,5 +1,5 @@
 <h3 class="mdc-typography--headline3">Random Location</h3>
-<p>Click the Find button to get a random Location to go to!</p>
+<p>Click the Find button to get a random Location to go to. A Panoramic view is available below the map!</p>
 <p>Click Save to store the marker of the location shown, if you are interested in going for a visit!</p>
 <div>
     <button id="location" class="button">Find me a spot!</button>
@@ -27,15 +27,13 @@ $('#location').on('click', function() {
 });
 
 $('#Show').on('click', function() {
-     map.setZoom(2);
+     map.setZoom(1);
 });
 
 $('#Save').on('click', function() {
-//     console.log("Lat: " + latN);
-//     console.log("Log: " + lngN);
     db.Markers.put({lt:latN, lg:lngN});
 });
-    
+
     
 function initMap() {
     var sv = new google.maps.StreetViewService;
