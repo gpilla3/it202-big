@@ -1,14 +1,15 @@
 var cacheName = 'mca-v1';
 var appShellFiles = [
  "index.html",
- "cats.html",
+ "Cats.html",
  "Map.html",
  "Info.html",
  "Cam.html",
- "script.js",
  "style.css",
+ "script.js",
  "icon.ico",
- "warning.png"
+ "nose-clip-art-51.png",
+ "glasses2.png"
 ];
 
 self.addEventListener('install', function(e) {

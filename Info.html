@@ -17,6 +17,7 @@
     <h4><b></b></h4> 
     <p id="Year"></p>
     <p id="Rating"></p>  
+    <p id="Rated"></p>  
   </div>
 </div>
 
@@ -26,17 +27,20 @@
     function findMovie(){
         var movieName = $('#movie').val();
         $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
-            var poster = response.Poster;
             console.log(response);
-            $('h4').html(response.Title);
+            var poster = response.Poster;
+            $('h4').html(response.Title + ' (Runtime: ' + response.Runtime + ')');
             document.getElementById("Year").innerHTML = "Released: " + response.Released;
             document.getElementById("Rating").innerHTML = "IMDB Rating: " + response.imdbRating;
+            document.getElementById("Rated").innerHTML = "Rated: " + response.Rated;
             if(poster !== "N/A"){
-                $('img').attr('src',poster);
+                $('img').attr('src', poster);
+            }else{
+                $('img').attr('src', 'https://bit.ly/2mx1zI0');
             }
         })
     }
-
+    
     $('#search').on('click', function() {
           var x = document.getElementById("searched");
           if (x.style.display === "none") {

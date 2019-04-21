@@ -3,7 +3,6 @@
         border: solid 5px silver;
         width: 100px;
     }
-
     .image-option-active {
         border-color: blue;
     }
@@ -42,15 +41,12 @@
        "offset_vertical": 100
       }              
   ];
-
   var activeImage = images[0];
   var activeImageObject = new Image();
   activeImageObject.src = activeImage["filename"];
-
   // const funnyNoseAndGlasses = new Image();
   // funnyNoseAndGlasses.src = "nose-clip-art-51.png";
   // originally from http://clipart-library.com/new_gallery/nose-clip-art-51.png 
-
   // variables
   const supported = 'mediaDevices' in navigator;
   const player = document.getElementById('player');
@@ -58,31 +54,23 @@
   const context = canvas.getContext('2d');
   const captureButton = document.getElementById('capture');
   const dataDiv = document.getElementById('imageData');
-
   const visionApiEndpoint = "https://vision.googleapis.com/v1/images:annotate";
   var requestBody;
-
   const constraints = {
     video: true,
   };
-
   // Attach the video stream to the video element and autoplay.
   navigator.mediaDevices.getUserMedia(constraints)
     .then((stream) => {
       player.srcObject = stream;
     });
-
-
   // hook up event listener
   captureButton.addEventListener('click', () => {
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, canvas.width, canvas.height);
-
     // get the image facial data
     getImageData("FACE_DETECTION");
   });
-
-
   $.each(images, function(i,v) {
     var img = $("<img>")
     img.attr("src", v.filename);
@@ -93,17 +81,13 @@
     }
     $("#imageOptions").append(img);
   });
-
   $(".image-option").on("click", function(){
     $(".image-option-active").removeClass("image-option-active");
     $(this).addClass("image-option-active");
     activeImage = images[$(this).attr("data-index")];
     activeImageObject.src = activeImage["filename"];
   });
-
-
 function getImageData(type) {
-
  // structure request body based on Cloud Vision API docs
  requestBody = {
     "requests":[
@@ -133,7 +117,6 @@ function getImageData(type) {
       */
       var left_eye = response.responses[0].faceAnnotations[0].landmarks.filter(function(el) {return el.type == "LEFT_EYE_PUPIL"})[0];
       var right_eye = response.responses[0].faceAnnotations[0].landmarks.filter(function(el) {return el.type == "RIGHT_EYE_PUPIL"})[0];
-
       /*  compare the distance between the pupils to the distance 
             between the lens centers to get a scaling pct 
       */
@@ -143,25 +126,19 @@ function getImageData(type) {
       var leftX = left_eye.position.x;
       var eye_distance = parseInt(rightX) - parseInt(leftX);
       var scale_pct = eye_distance/imageEyeDistance;   
-
       /*  after getting that part working, I needed to offset
           the destination x,y due to drawImage dest x,y as the 
           top left corner of the image we're drawing;
-
           I had to look at the nose/glasses image;  I found the center of the right-eye lens is 150 x and 100 y from the top left of the image
-
       */
       var destOffsetX = -1*activeImage["offset_horizontal"];
       var destOffsetY = -1*activeImage["offset_vertical"];
-
-
       /* after some more playing around, I realized that "right eye"
           in the data doesn't mean *my* right eye; I actually need to offset from the "left (most) eye (in the image)"
       */
       var leftY = left_eye.position.y;
       var destX = leftX + (destOffsetX*scale_pct);
       var destY = leftY + (destOffsetY*scale_pct);
-
       /* and finally, to avoid problems in getting the data url of a 
           canvas that has been modified, I'm putting the "funny nose"
           version into a separate canvas
@@ -173,7 +150,6 @@ function getImageData(type) {
         activeImageObject.width*scale_pct,    // the scaled width
         activeImageObject.height*scale_pct    // the scaled height
       );
-
     });
 }
 </script>
