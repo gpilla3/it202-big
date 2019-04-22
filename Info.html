@@ -5,49 +5,84 @@
             <input type="text" id="movie" class="mdc-text-field__input" placeholder="Movie Title">
             <label class="mdc-floating-label mdc-theme--primary" for="search"></label>
             <button id="search" class="button">Search</button>
+            <button id="show" class="button">Show Searched</button>
             <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
     </div>
 </div>
 
-<hr>
-
 <div id="searched" class="card h-centered" style="display:none ">
-  <img src="https://bit.ly/2mx1zI0" height="300" width="200">
   <div class="container">
+    <img id="pst" src="https://bit.ly/2mx1zI0" height="300" width="200">
     <h4><b></b></h4>
     <p id="Director"></p>
     <p id="Year"></p>
     <p id="Rating"></p>  
-    <p id="Rated"></p>  
+    <p id="Rated"></p>
   </div>
 </div>
 
+<hr>
+
+<div id="saved" class="card" style="display:none">
+  <div id="inf" class="container"> </div>
+</div>
+
 <script>
-//http://www.omdbapi.com/?i=tt3896198&apikey=8d9fa46f
+var db2 = new Dexie("Movie_Database");
+    db2.version(3).stores({
+        Movies: 'titl, pstr, dirct, yr, rtng, rtd'
+    });
     
-    function findMovie(){
-        var movieName = $('#movie').val();
-        $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
-            console.log(response);
-            var poster = response.Poster;
-            $('h4').html(response.Title + ' (Runtime: ' + response.Runtime + ')');
-            document.getElementById("Director").innerHTML = "Directed By " + response.Director;
-            document.getElementById("Year").innerHTML = "Released: " + response.Released;
-            document.getElementById("Rating").innerHTML = "IMDB Rating: " + response.imdbRating;
-            document.getElementById("Rated").innerHTML = "Rated: " + response.Rated;
-            if(poster !== "N/A"){
-                $('img').attr('src', poster);
-            }else{
-                $('img').attr('src', 'https://bit.ly/2mx1zI0');
-            }
-        })
+//http://www.omdbapi.com/?i=tt3896198&apikey=8d9fa46f
+
+function findMovie(){
+    var movieName = $('#movie').val();
+    $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
+        console.log(response);
+        var poster = response.Poster;
+        $('h4').html(response.Title + ' (Runtime: ' + response.Runtime + ')');
+        document.getElementById("Director").innerHTML = "Directed By " + response.Director;
+        document.getElementById("Year").innerHTML = "Released: " + response.Released;
+        document.getElementById("Rating").innerHTML = "IMDB Rating: " + response.imdbRating;
+        document.getElementById("Rated").innerHTML = "Rated: " + response.Rated;
+        db2.Movies.put({titl: response.Title + ' (Runtime: ' + response.Runtime + ')', pstr: poster, dirct: response.Director, yr: response.Released, rtng: response.imdbRating, rtd: response.Rated});
+        if(poster !== "N/A"){
+            document.getElementById("pst").src = poster;
+        }else{
+            document.getElementById("pst").src = 'https://bit.ly/2mx1zI0';
+        }
+    })
+}
+
+$('#search').on('click', function() {
+    var x = document.getElementById("searched");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    }
+    var x2 = document.getElementById("saved");
+    x2.style.display = "none";
+    findMovie();
+});
+    
+$('#show').on('click', function() {
+    var x = document.getElementById("saved");
+    var poster;
+    if (x.style.display === "none") {
+        x.style.display = "block";
     }
     
-    $('#search').on('click', function() {
-          var x = document.getElementById("searched");
-          if (x.style.display === "none") {
-            x.style.display = "block";
-          }
-        findMovie();
+    var x2 = document.getElementById("searched");
+    x2.style.display = "none";
+    
+    document.getElementById("inf").innerHTML = "<h3>Here is what you searched:</h3>";
+    db2.Movies.each(function(movie){
+        if(movie.pstr !== "N/A"){
+            poster = movie.pstr;
+        }else{
+            poster = 'https://bit.ly/2mx1zI0';
+        }
+        console.log(movie.dirct);
+        document.getElementById("inf").innerHTML += "<img src=" + poster + "height='300' width='200'>" + "<h4><b>" + movie.titl + "</b></h4> <p>" + "Directed by " + movie.dirct + "</p> <p>" + "Released: " + movie.yr + "</p> <p>" + "IMDB Rating: " + movie.rtng + "</p> <p>" + "Rated: " + movie.rtd + "</p>"; 
     });
+});
 </script>
