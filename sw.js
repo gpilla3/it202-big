@@ -5,6 +5,7 @@ var appShellFiles = [
  "Map.html",
  "Info.html",
  "Cam.html",
+ "About.html",
  "style.css",
  "script.js",
  "icon.ico",

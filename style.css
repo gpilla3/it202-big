@@ -9,7 +9,7 @@
 }
 
 body {
-    
+    background-color: #d4d4dc;
     margin: 0;
 }
 
@@ -31,8 +31,9 @@ select {
 }
 
 .button {
+    border-color: #4CAF50;
     background-color: #ec7f37;
-    border: none;
+    border: 2px solid;
     color: white;
     padding: 15px 25px;
     text-align: center;

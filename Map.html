@@ -5,7 +5,7 @@
 
     <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
         <button id="location" class="button">Find me a spot!</button>
-        <button id="Save" class="button" style="background-color: #4cb69f">Save it!</button>
+        <button id="Save" class="button">Save it!</button>
         <button id="Show" class="button">Show Saved!</button>
         <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
     </div>
@@ -46,7 +46,7 @@ function initMap() {
     lngN = Math.floor((Math.random()*(180*2)-180));
     locN = {lat: latN, lng: lngN};
 
-    sv.getPanorama({location: locN, radius: 10000000}, processSVData);
+    sv.getPanorama({location: locN, radius: 1000000}, processSVData);
 }
     
 function processSVData(data, status){

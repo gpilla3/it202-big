@@ -1,12 +1,12 @@
 <div class="h-centered">
     <h3 class="mdc-typography--headline3">Movie/TV Info</h3>
-    <p>Enter the movie title or TV series title to get information about it!</p>
+    <p>Enter the Movie title or TV Show title to get information about it!</p>
     <p>Click Show Searched to see everything you searched!</p>
     <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-            <input type="text" id="movie" class="mdc-text-field__input" placeholder="Movie Title">
+            <input type="text" id="movie" class="mdc-text-field__input" placeholder="Movie Title" style="width: 120px;">
             <label class="mdc-floating-label mdc-theme--primary" for="search"></label>
             <button id="search" class="button">Search</button>
-            <button id="show" class="button" style="background-color: #4cb69f">Show Searched</button>
+            <button id="show" class="button">Show Searched</button>
             <div class="mdc-line-ripple" data-mdc-auto-init="MDCLineRipple"></div>
     </div>
 </div>
@@ -39,7 +39,6 @@ var db2 = new Dexie("Movie_Database");
 function findMovie(){
     var movieName = $('#movie').val();
     $.getJSON('https://www.omdbapi.com/?apikey=8d9fa46f&t=' + encodeURI(movieName)).then(function(response){
-        console.log(response);
         var poster = response.Poster;
         $('h4').html(response.Title + ' (Runtime: ' + response.Runtime + ')');
         document.getElementById("Director").innerHTML = "Directed By " + response.Director;
@@ -82,7 +81,6 @@ $('#show').on('click', function() {
         }else{
             poster = 'https://bit.ly/2mx1zI0';
         }
-        console.log(movie.dirct);
         document.getElementById("inf").innerHTML += "<img src=" + poster + "height='300' width='200'>" + "<h4><b>" + movie.titl + "</b></h4> <p>" + "Directed by " + movie.dirct + "</p> <p>" + "Released: " + movie.yr + "</p> <p>" + "IMDB Rating: " + movie.rtng + "</p> <p>" + "Rated: " + movie.rtd + "</p>"; 
     });
 });
