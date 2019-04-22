@@ -3,12 +3,13 @@
 }
 
 :root {
-    --mdc-theme-primary: #219c1ccc;
-    --mdc-theme-background: #0f8229;
-    --mdc-theme-secondary: #13b15f;
+    --mdc-theme-primary: #393939;
+    --mdc-theme-background: #FF5A09;
+    --mdc-theme-secondary: #be4f0c;
 }
 
 body {
+    
     margin: 0;
 }
 
@@ -30,7 +31,7 @@ select {
 }
 
 .button {
-    background-color: #4CAF50;
+    background-color: #ec7f37;
     border: none;
     color: white;
     padding: 15px 25px;
@@ -40,8 +41,9 @@ select {
 }
 
 .button:hover {
-    background-color: green;
+    background-color: #be4f0c;
 }
+
 
 #toggle-div {
     margin: 15px 90px 15px 0px;
