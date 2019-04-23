@@ -1,16 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>RandomNess</title>
+    <meta http-equiv="Refresh" content="0;URL=https://gpilla3.github.io/it202-big/"/>
+    <meta name="theme-color" content="#be4f0c">	
+    <meta name="description" content="A simple app that uses a couple of APIs built for IT-202 @UIC">
+    <title>RandomNess</title>
 	<link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.ico">
     <link rel="apple-touch-icon" sizes="152x152" href="icon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="icon.ico">
     <link rel="apple-touch-icon" sizes="167x167" href="icon.ico">	
-    <link rel="icon" href="icon.ico" />
+    <link rel="icon" sizes="256x256" href="icon.ico" />
 	<link rel="stylesheet" href="https://unpkg.com/material-components-web@0.40.0/dist/material-components-web.min.css" />
 	<link href="style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -49,10 +52,17 @@
   </div>
 	
     <script>
-    if('serviceWorker' in navigator) {
-        navigator.serviceWorker
-           .register('sw.js')
-           .then(function() { console.log("Registered Service Worker"); });
+    //Used from: https://stackoverflow.com/questions/46541071/progressive-web-app-does-not-work-offline-error
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js?v2', {
+        scope: '.' // <--- THIS BIT IS REQUIRED
+        }).then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+        });
     }
     </script>
     
