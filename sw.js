@@ -8,7 +8,7 @@ var appShellFiles = [
  "About.html",
  "style.css",
  "script.js",
- "icon.ico",
+ "icon.png",
  "nose-clip-art-51.png",
  "glasses2.png"
 ];
