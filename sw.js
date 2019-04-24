@@ -10,7 +10,8 @@ var appShellFiles = [
  "script.js",
  "icon.png",
  "nose-clip-art-51.png",
- "glasses2.png"
+ "glasses2.png",
+ "noImage.png"
 ];
 
 self.addEventListener('install', function(e) {

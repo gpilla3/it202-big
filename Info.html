@@ -15,7 +15,7 @@
 
 <div id="searched" class="card h-centered" style="display:none ">
   <div class="container">
-    <img id="pst" src="https://bit.ly/2mx1zI0" height="300" width="200">
+    <img id="pst" src="noImage.png" height="300" width="200">
     <h4><b></b></h4>
     <p id="Director"></p>
     <p id="Year"></p>
@@ -49,7 +49,7 @@ function findMovie(){
         if(poster !== "N/A"){
             document.getElementById("pst").src = poster;
         }else{
-            document.getElementById("pst").src = 'https://bit.ly/2mx1zI0';
+            document.getElementById("pst").src = 'noImage.png';
         }
     })
 }
@@ -79,7 +79,7 @@ $('#show').on('click', function() {
         if(movie.pstr !== "N/A"){
             poster = movie.pstr;
         }else{
-            poster = 'https://bit.ly/2mx1zI0';
+            poster = 'noImage.png';
         }
         document.getElementById("inf").innerHTML += "<img src=" + poster + "height='300' width='200'>" + "<h4><b>" + movie.titl + "</b></h4> <p>" + "Directed by " + movie.dirct + "</p> <p>" + "Released: " + movie.yr + "</p> <p>" + "IMDB Rating: " + movie.rtng + "</p> <p>" + "Rated: " + movie.rtd + "</p>"; 
     });
