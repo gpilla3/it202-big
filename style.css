@@ -1,6 +1,5 @@
-* {
-    font-family: 'Quicksand', sans-serif;
-}
+@font-face { font-family: 'Quicksand', sans-serif; font-display: swap; }
+
 
 :root {
     --mdc-theme-primary: #393939;
