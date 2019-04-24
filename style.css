@@ -63,27 +63,10 @@ td {
     margin: 0px 15px 0px 0px;
 }
 
-h1.description {
-    font-size: 62px;
-    line-height: 62px;
-}
-
 .h-centered {
     text-align: center;
     align-items: center;
     align-content: center;
-}
-
-.v-centered {
-    position: absolute;
-}
-
-.top-block-wrapper {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    height: 40%;
 }
 
 .bottom-block-wrapper {
@@ -95,12 +78,6 @@ h1.description {
     margin: 0px 15px 0px 15px;
 }
 
-.align-with-label {
-    display: inline; 
-    vertical-align: 28%;
-    margin: 0px 5px 0px 5px
-}
-
 .mdc-card {
     width: 100%;
     padding: 16px 0px 16px 0px
@@ -110,41 +87,4 @@ h1.description {
     font-size: 36px;
     font-weight: bolder !important;
     margin: 0px 15px 0px 15px;
-}
-
-
-.subtitle {
-    font-size: 24px;
-    opacity: 0.75;
-    margin: 0px 15px 0px 15px;
-}
-
-.inline {
-    display: inline !important;
-}
-
-.vertical-separator {
-    border-left: 1px solid rgb(61, 61, 61);
-    display: inline;
-}
-
-.padded {
-    margin: 5px 0px 5px 0px;
-}
-
-.left-right-container {
-    width: 100%;
-    margin: auto;
-}
-
-.left {
-    float: left;
-}
-
-.right {
-    margin-left: 25%;
-}
-
-.open-times {
-    text-align: center;
 }
