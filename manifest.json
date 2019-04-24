@@ -1,7 +1,7 @@
 {
   "name": "RandomNess",
   "short_name": "RandNess",
-  "start_url": "/",
+  "start_url": "index.html",
   "scope": "./",
   "theme_color": "#be4f0c",
   "display": "standalone",
