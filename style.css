@@ -46,21 +46,8 @@ select {
     background-color: #be4f0c;
 }
 
-
-#toggle-div {
-    margin: 15px 90px 15px 0px;
-}
-
 hr {
     clear: both;
-}
-
-tr {
-    margin: 0px 0px 15px 0px;
-}
-
-td {
-    margin: 0px 15px 0px 0px;
 }
 
 .h-centered {
@@ -81,10 +68,4 @@ td {
 .mdc-card {
     width: 100%;
     padding: 16px 0px 16px 0px
-}
-
-.title {
-    font-size: 36px;
-    font-weight: bolder !important;
-    margin: 0px 15px 0px 15px;
 }
